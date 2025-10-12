@@ -52,7 +52,7 @@ function ContactMe() {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
-          className="dark:bg-[#101a2a] bg-white border border-white/10 rounded-2xl p-6 shadow-xl"
+          className="dark:bg-[#101a2a] bg-green-500 border border-white/10 rounded-2xl p-6 shadow-xl"
         >
           <input type="hidden" name="form-name" value="portfolio-contact" />
           <p className="hidden">
@@ -63,7 +63,7 @@ function ContactMe() {
 
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-gray-400 mb-1" htmlFor="name">
+              <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="name">
                 Name
               </label>
               <input
@@ -71,7 +71,7 @@ function ContactMe() {
                 name="name"
                 type="text"
                 required
-                className="w-full rounded-xl bg-transparent border border-green-500 dark:border-yellow-500
+                className="w-full rounded-xl dark:bg-transparent bg-white border border-green-500 dark:border-yellow-500
                   dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
                 focus:ring-green-500/20  text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
                 placeholder="Jane Doe"
@@ -79,7 +79,7 @@ function ContactMe() {
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1" htmlFor="email">
+              <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="email">
                 Email
               </label>
               <input
@@ -87,7 +87,7 @@ function ContactMe() {
                 name="email"
                 type="email"
                 required
-                className="w-full rounded-xl bg-transparent border border-green-500  dark:border-yellow-500
+                className="w-full rounded-xl dark:bg-transparent bg-white border border border-green-500  dark:border-yellow-500
                  dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
                 focus:ring-green-500/20 text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
                 placeholder="jane@company.com"
@@ -96,7 +96,7 @@ function ContactMe() {
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm text-gray-400 mb-1" htmlFor="message">
+            <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="message">
               Message
             </label>
             <textarea
@@ -104,7 +104,7 @@ function ContactMe() {
               name="message"
               rows={5}
               required
-              className="w-full rounded-xl bg-transparent border border-green-500  dark:border-yellow-500
+              className="w-full rounded-xl dark:bg-transparent bg-white border border-green-500  dark:border-yellow-500
                 dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
                 focus:ring-green-500/20 text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
               placeholder="Write your message here…"
@@ -115,15 +115,15 @@ function ContactMe() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="inline-flex items-center justify-center rounded-full border dark:border-yellow-400 border-green-400 px-5 py-2.5
-                dark:text-yellow-300 text-green-300 font-medium dark:hover:bg-yellow-400 hover:bg-green-400 hover:text-[#FFFFFF]
+              className="inline-flex items-center justify-center bg-emerald-600 dark:bg-transparent rounded-full border dark:border-yellow-400 border-green-300 px-5 py-2.5
+                dark:text-yellow-300 text-white font-medium dark:hover:bg-yellow-400 hover:bg-green-800 hover:text-[#FFFFFF]
                  dark:hover:text-white transition disabled:opacity-60"
             >
               {status === "loading" ? "Sending…" : "Send message"}
             </button>
             <a
               href="mailto:guetaryan@gmail.com"
-              className="text-sm text-gray-400 dark:hover:text-yellow-400 hover:text-green-400"
+              className="text-sm dark:text-gray-400 text-white dark:hover:text-yellow-400 hover:text-green-200"
             >
               or email me directly → guetaryan@gmail.com
             </a>

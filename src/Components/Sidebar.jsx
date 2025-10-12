@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaHome, FaUser, FaTools, FaEnvelope} from "react-icons/fa";
+import { GrProjects } from "react-icons/gr";
 
 
 const SECTIONS = [
   { id: "home",    label: "Home",    icon: FaHome },
   { id: "about",   label: "About",   icon: FaUser },
   { id: "skills",  label: "Skills",  icon: FaTools },
+  { id: "projects",  label: "Projects",  icon: GrProjects },
   { id: "contact", label: "Contact", icon: FaEnvelope },
 ];
 

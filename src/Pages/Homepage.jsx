@@ -17,8 +17,6 @@ function Homepage() {
 
     const [darkMode, setDarkMode] = useState(true); 
 
-
-
     return (
         <div className={darkMode ? "dark" : ""}>
         <BottomDock/>
@@ -90,16 +88,23 @@ function Homepage() {
             <section className='mt-60' id='skills'>
                 <Skills/>
             </section>
-            <section className='mt-52'>
+            <section className='mt-52' id='projects'>
                 <Projects/>
             </section>
-            <section className='mt-36 mb-52 '> 
+            <section className='mt-36'> 
                 <Services/>
             </section>
-        </main>
-        <section id='contact' className='w-full py-32 dark:bg-[#0e1421] bg-[#f3f3f3] dark:text-gray-300'>
-                <ContactMe/>
+            <section id='contact' className='w-full py-32 mt-36 relative overflow-hidden dark:bg-gray-900 bg-white dark:text-gray-300'>
+                <div className='max-w-7xl mx-auto px-6'>
+                    <ContactMe/>
+                </div>
             </section>
+            
+        </main>
+
+            {/* <section id='contact' className='w-full py-32 bg-inherit dark:bg-inherit'>
+                <ContactMe/>
+            </section> */}
         {/* <ScrollBtn/> */}
         </div>
     );

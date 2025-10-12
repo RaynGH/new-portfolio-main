@@ -88,12 +88,12 @@ const PROJECTS = [
         img: SpicIllustration,
         badge: "Illustration", 
     },
-    {
-        title: "Matcha OC",
-        category: "other",
-        img: matcha,
-        badge: "Illustration", 
-    },
+    // {
+    //     title: "Matcha OC",
+    //     category: "other",
+    //     img: matcha,
+    //     badge: "Illustration", 
+    // },
     {
         title: "OC",
         category: "other",
@@ -196,7 +196,7 @@ function Projects() {
                     <div className="flex items-center justify-between">
                       <p className="dark:text-white text-gray-800/35 text-[13px] font-semibold">{p.title}</p>
                       {p.badge && (
-                        <span className="text-[10px] uppercase tracking-wide px-2 py-1 rounded-full dark:bg-yellow-400/15 bg-green-400/15 dark:text-yellow-300 text-green-500 border dark:border-yellow-400/30
+                        <span className="text-[10px] text-center uppercase tracking-wide px-2 py-1 rounded-full dark:bg-yellow-400/15 bg-green-400/15 dark:text-yellow-300 text-green-500 border dark:border-yellow-400/30
                         border-green-400/30">
                           {p.badge}
                         </span>
