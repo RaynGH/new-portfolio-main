@@ -88,11 +88,11 @@ function Homepage() {
             <section className='mt-60' id='skills'>
                 <Skills/>
             </section>
+            <section className='mt-36' id='skills'> 
+                <Services/>
+            </section>
             <section className='mt-52' id='projects'>
                 <Projects/>
-            </section>
-            <section className='mt-36'> 
-                <Services/>
             </section>
             <section id='contact' className='w-full py-32 mt-36 relative overflow-hidden dark:bg-gray-900 bg-white dark:text-gray-300'>
                 <div className='max-w-7xl mx-auto px-6'>

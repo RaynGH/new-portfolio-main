@@ -1,9 +1,11 @@
 import { FaHome, FaUser, FaTools, FaEnvelope } from "react-icons/fa";
+import { GrProjects } from "react-icons/gr";
 function bottomDock() {
     const items = [
     { id: "home", icon: FaHome, label: "Home" },
     { id: "about", icon: FaUser, label: "About" },
     { id: "skills", icon: FaTools, label: "Skills" },
+    { id: "projects",  label: "Projects",  icon: GrProjects },
     { id: "contact", icon: FaEnvelope, label: "Contact" },
   ];
   const goTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
