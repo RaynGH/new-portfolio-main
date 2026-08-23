@@ -1,10 +1,8 @@
-import React from 'react';
-// import { FaMoon } from "react-icons/fa";
-import Image from '../Images/CroppedPic.png';
-import { FaLinkedin, FaYoutube, FaGithub, FaViber, FaFacebookMessenger } from "react-icons/fa";
-import { MdSunny } from "react-icons/md";
+import React, { useState } from 'react';
+import { FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { MdSunny } from 'react-icons/md';
 
-import { useState } from 'react';
+import Image from '../Images/CroppedPic.png';
 import CV from '../Assets/John_Averian_Oro_Resume.pdf';
 
 import Skills from '../Components/Skills.jsx';
@@ -13,101 +11,237 @@ import Sidebar from '../Components/Sidebar.jsx';
 import Projects from '../Components/Projects.jsx';
 import Services from '../Components/Services.jsx';
 import ContactMe from '../Components/ContactMe.jsx';
+
+const CLIENTS = [
+  {
+    name: 'Alltomate',
+    role: 'SEO, WordPress & Content Operations',
+    description:
+      'Supporting website growth through SEO-focused content production, internal linking, keyword research, content QA, and WordPress implementation.',
+    tags: ['WordPress', 'Elementor', 'SEO', 'Content Strategy'],
+  },
+  {
+    name: 'Dunrite',
+    role: 'Digital & Creative Support',
+    description:
+      'Contributed to client-facing digital work with an emphasis on clean presentation, practical execution, and brand-aligned content.',
+    tags: ['Creative Support', 'Digital Content', 'Design'],
+  },
+  {
+    name: 'Junkshot',
+    role: 'Digital & Creative Support',
+    description:
+      'Handled digital creative work designed to support the brand’s online presence and day-to-day marketing needs.',
+    tags: ['Creative Support', 'Digital Content', 'Marketing'],
+  },
+];
+
 function Homepage() {
+  const [darkMode, setDarkMode] = useState(true);
 
-    const [darkMode, setDarkMode] = useState(true); 
+  return (
+    <div className={darkMode ? 'dark' : ''}>
+      <BottomDock />
+      <Sidebar />
 
-    return (
-        <div className={darkMode ? "dark" : ""}>
-        <BottomDock/>
-        <Sidebar/>
-        <main className='bg-white px-10 md:px-20 lg:px-72 dark:bg-gray-900 dark:ease-in-out duration-150 py-0'>
-            {/* Navbar */}
-            <section id='home'>
-                <nav className='py-10 mb-12 flex justify-between '>
-                    <h1 className='text-lg dark:text-white font-semibold'>RYAN</h1>
-                    <ul className='flex items-center'>
-                        <li>
-                            <MdSunny onClick={() => setDarkMode(!darkMode)} className='cursor-pointer text-lg dark:text-white
-                             dark:hover:text-yellow-300'/>
-                        </li>
-                    </ul>
-                </nav>
-                {/* Intro Section */}
-                {/* text-5xl py-2 text-blue-600 font-medium md:text-6xl dark:text-yellow-300 */}
-                <div className='text-center p-10'>
-                    <center><h2 className='text-4xl relative inline-block w-full max-w-md text-green-500 font-medium md:text-3xl 
-                                    before:absolute before:inset-0 before:animate-typewriter 
-                                  before:bg-gray-100 dark:before:bg-gray-900 after:absolute after:inset-1 after:w-[0.200em]
-                                    after:animate-caret after:bg-green-500 dark:after:bg-yellow-300 dark:text-yellow-300
-                                    xs:text-sm sm:text-2xl ms:text-[15px] lg:text-3xl'>
-                                    John Averian Oro</h2></center>
-                    <h3 className='text-2xl py-2 md:text-3xl dark:text-white ms:text-md'>Developer / 2D Animator.</h3>
-                    <p className='text-md py-5 leading-8 text-gray-800 md:text-xl max-w-xl mx-auto dark:text-white'>
-                        I'm an aspiring developer and aims to provide services for programming and motion graphics design.
-                    </p>
-                </div>
-                <div className='flex justify-center'>
-                    <a href={CV} download="John_Averian_Oro_Resume" >
-                        <button type='submit' className='bg-transparent hover:bg-green-500 text-green-700 font-semibold
-                        hover:text-white py-3 px-4 border border-green-500 hover:border-transparent rounded-full
-                        hover:ease-in duration-150 dark:text-yellow-300 dark:border-yellow-300 dark:hover:bg-yellow-400 dark:hover:text-white'
-                        >Download CV</button>
-                    </a>
-                </div>
-            </section>
-            <section className='mt-60'id='about'>
-                <div className='max-w-6xl mx-auto lg:px-6 flex flex-col lg:flex-row items-center lg:items-start gap-12'>
-                    <div className="flex-shrink-0 flex justify-center lg:justify-start w-full lg:w-1/3">
-                        <img src={Image} className='w-72 h-72 rounded-full object-cover border-2 border-green-500 shadow-lg dark:border-yellow-400' alt='profile'/>
-                    </div>
-                    <div className="w-full lg:w-2/3 text-center lg:text-left">
-                      <h3 className="text-2xl font-semiboldmb-4 dark:text-white text-gray-800 mb-5">About me</h3>
-                        <p className="text-md leading-8 text-gray-800 dark:text-white text-justify">
-                          I’m passionate about technology and how it can be used to solve problems and create
-                          better experiences for people. I enjoy working on projects like web development and animation, where I can apply 
-                          both creativity and technical skills to build something functional and user-friendly.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section className='py-10'>
-                    <div className='flex justify-center md:justify-center gap-8 text-4xl sm:text-5xl text-gray-600'>
-                        <a href='https://www.linkedin.com/in/john-averian-oro-b8ab41280/' rel='nonreferrer' target='blank'>
-                            <FaLinkedin className='dark:text-white cursor-pointer text-green-500'/>
-                        </a>
-                        <a href='https://www.youtube.com/Rayn2D'  rel='nonreferrer'  target='blank'>
-                            <FaYoutube  className='dark:text-white cursor-pointer text-green-500'/>
-                        </a>
-                        <a href='https://github.com/RaynGH' rel='nonreferrer'  target='blank'>
-                            <FaGithub   className='dark:text-white cursor-pointer text-green-500'/>
-                        </a>
-                    </div>
-            </section>
+      <main className="min-h-screen bg-white px-6 sm:px-10 md:px-16 lg:px-28 xl:px-44 2xl:px-64 dark:bg-gray-900 transition-colors duration-200">
+        <section id="home" className="min-h-screen flex flex-col">
+          <nav className="py-8 sm:py-10 flex items-center justify-between">
+            <a
+              href="#home"
+              className="text-lg font-bold tracking-[0.2em] text-gray-900 dark:text-white"
+            >
+              RAYN
+            </a>
 
-            <section className='mt-60' id='skills'>
-                <Skills/>
-            </section>
-            <section className='mt-36' id='skills'> 
-                <Services/>
-            </section>
-            <section className='mt-52' id='projects'>
-                <Projects/>
-            </section>
-            <section id='contact' className='w-full py-32 mt-36 relative overflow-hidden dark:bg-gray-900 bg-white dark:text-gray-300'>
-                <div className='max-w-7xl mx-auto px-6'>
-                    <ContactMe/>
-                </div>
-            </section>
-            
-        </main>
+            <button
+              type="button"
+              onClick={() => setDarkMode(!darkMode)}
+              aria-label="Toggle light and dark mode"
+              className="grid h-10 w-10 place-items-center rounded-full border border-gray-200 text-gray-700 transition hover:border-green-500 hover:text-green-500 dark:border-white/10 dark:text-white dark:hover:border-yellow-300 dark:hover:text-yellow-300"
+            >
+              <MdSunny className="text-xl" />
+            </button>
+          </nav>
 
-            {/* <section id='contact' className='w-full py-32 bg-inherit dark:bg-inherit'>
-                <ContactMe/>
-            </section> */}
-        {/* <ScrollBtn/> */}
-        </div>
-    );
-};
+          <div className="flex flex-1 items-center justify-center py-16 sm:py-24">
+            <div className="max-w-4xl text-center">
+              <p className="mb-5 text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-green-600 dark:text-yellow-300">
+                Web · Digital · Creative
+              </p>
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
+                John Averian Oro
+              </h1>
+
+              <h2 className="mt-5 text-xl sm:text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300">
+                Web & Digital Specialist · Creative Technologist · 2D Animator
+              </h2>
+
+              <p className="mx-auto mt-7 max-w-2xl text-base sm:text-lg leading-8 text-gray-600 dark:text-gray-400">
+                I build, improve, and support digital experiences across web development,
+                SEO and content operations, creative production, and 2D animation.
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href="#projects"
+                  className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-green-500 px-6 py-3 font-semibold text-white transition hover:bg-green-600 dark:bg-yellow-400 dark:text-gray-900 dark:hover:bg-yellow-300"
+                >
+                  View My Work
+                </a>
+
+                <a
+                  href={CV}
+                  download="John_Averian_Oro_Resume"
+                  className="inline-flex min-w-[160px] items-center justify-center rounded-full border border-green-500 px-6 py-3 font-semibold text-green-600 transition hover:bg-green-500 hover:text-white dark:border-yellow-300 dark:text-yellow-300 dark:hover:bg-yellow-300 dark:hover:text-gray-900"
+                >
+                  Download CV
+                </a>
+              </div>
+
+              <div className="mt-10 flex justify-center gap-6 text-2xl">
+                <a
+                  href="https://www.linkedin.com/in/john-averian-oro-b8ab41280/"
+                  rel="noreferrer"
+                  target="_blank"
+                  aria-label="LinkedIn"
+                  className="text-gray-500 transition hover:text-green-500 dark:text-gray-400 dark:hover:text-yellow-300"
+                >
+                  <FaLinkedin />
+                </a>
+                <a
+                  href="https://www.youtube.com/Rayn2D"
+                  rel="noreferrer"
+                  target="_blank"
+                  aria-label="YouTube"
+                  className="text-gray-500 transition hover:text-green-500 dark:text-gray-400 dark:hover:text-yellow-300"
+                >
+                  <FaYoutube />
+                </a>
+                <a
+                  href="https://github.com/RaynGH"
+                  rel="noreferrer"
+                  target="_blank"
+                  aria-label="GitHub"
+                  className="text-gray-500 transition hover:text-green-500 dark:text-gray-400 dark:hover:text-yellow-300"
+                >
+                  <FaGithub />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="clients" className="py-24 sm:py-32">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-12 max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                Selected Client Work
+              </p>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                Real work. Real responsibilities.
+              </h2>
+              <p className="mt-4 leading-7 text-gray-600 dark:text-gray-400">
+                A selection of brands I’ve supported across website operations, SEO,
+                digital content, and creative execution.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              {CLIENTS.map((client) => (
+                <article
+                  key={client.name}
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-[#101a2a]"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-600 dark:text-yellow-300">
+                    Client
+                  </p>
+                  <h3 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">
+                    {client.name}
+                  </h3>
+                  <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    {client.role}
+                  </p>
+                  <p className="mt-5 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                    {client.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {client.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-yellow-400/10 dark:text-yellow-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" className="py-24 sm:py-32">
+          <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-[0.8fr_1.2fr] items-center">
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative">
+                <div className="absolute -inset-3 rounded-full border border-green-500/20 dark:border-yellow-300/20" />
+                <img
+                  src={Image}
+                  className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-full object-cover border-2 border-green-500 shadow-xl dark:border-yellow-300"
+                  alt="John Averian Oro"
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                About Me
+              </p>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                Creative thinking backed by technical execution.
+              </h2>
+              <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">
+                I’m a multidisciplinary digital professional with experience across web
+                development, website operations, SEO-driven content work, technical
+                support, and 2D animation. I enjoy work that sits between creativity and
+                technology—whether that means improving a website, organizing content for
+                better discoverability, solving a technical problem, or bringing a visual
+                idea to life through animation.
+              </p>
+              <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">
+                My goal is simple: create work that is useful, clear, polished, and built
+                with the end user in mind.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" className="py-24 sm:py-32">
+          <Skills />
+        </section>
+
+        <section id="services" className="py-16 sm:py-24">
+          <Services />
+        </section>
+
+        <section id="projects" className="py-24 sm:py-32">
+          <Projects />
+        </section>
+
+        <section
+          id="contact"
+          className="relative overflow-hidden py-24 sm:py-32 text-gray-800 dark:text-gray-300"
+        >
+          <div className="mx-auto max-w-7xl">
+            <ContactMe />
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
 
 export default Homepage;
