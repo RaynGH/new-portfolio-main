@@ -11,6 +11,7 @@ import Sidebar from '../Components/Sidebar.jsx';
 import Projects from '../Components/Projects.jsx';
 import Services from '../Components/Services.jsx';
 import ContactMe from '../Components/ContactMe.jsx';
+import Experience from '../Components/Experience.jsx';
 
 const CLIENTS = [
   {
@@ -197,6 +198,10 @@ function Homepage() {
               ))}
             </div>
           </div>
+        </section>
+
+        <section id="experience" className="py-24 sm:py-32">
+          <Experience />
         </section>
 
         <section id="about" className="py-24 sm:py-32">
