@@ -1,10 +1,9 @@
-import { React, useState, useMemo, useEffect} from 'react'
-import { FaExternalLinkAlt, FaGithub, FaPlay } from "react-icons/fa";
-import CorumedImg from '../Images/corumed.png';
+import { useEffect, useMemo, useState } from 'react';
+import { FaGithub, FaPlay } from 'react-icons/fa';
+
 import HomepageImg from '../Images/Homepage 1.png';
 import OrdersImg from '../Images/Orders.png';
 import ProductsImg from '../Images/Products.png';
-import CartImg from '../Images/Cart.png';
 import PepsimanVsKefla from '../Images/PepsimanVsKefla.jpg';
 import GohanvsBlack from '../Images/GohanvsGokuBlack.jpg';
 import FCvsB from '../Images/FriezaCellVsBroly.jpg';
@@ -12,247 +11,321 @@ import GokuvsBardock from '../Images/GokuVsBardock.jpg';
 import SimpleLoginPage from '../Images/SimpleLoginPage.png';
 import TodoApp from '../Images/Todoapp.png';
 import SpicIllustration from '../Images/SpicloneArt.png';
-import HaeInIllustration from '../Images/HaeInArt.png';
 import ocArt from '../Images/OCArt.png';
 import gokuArt from '../Images/GokuArt.png';
-import matcha from '../Images/Matcha_Wife.png';
 
 const PROJECTS = [
-    //Capstone Project 
-    {
-        title: "Corumed - HomePage",
-        category: "web",
-        img: HomepageImg,
-        badge: "Capstone Project", 
-    },
-    {
-        title: "Corumed - Products Page",
-        category: "web",
-        img: ProductsImg,
-        badge: "Capstone Project", 
-    },
-    {
-        title: "Corumed - Orders Page",
-        category: "web",
-        img: OrdersImg,
-        badge: "Capstone Project", 
-    },
-    {
-        title: "Simple Login Page (VueJS)",
-        category: "web",
-        img: SimpleLoginPage,
-        badge: "web",
-        repo:  "https://github.com/RaynGH/LoginPageVue",
-    },
-    {
-        title: "Todo App (VueJS)",
-        category: "web",
-        img: TodoApp,
-        badge: "web",
-        repo:  "https://github.com/RaynGH/Todo-appVue",
-    },
-    //Animations
-    {
-        title: "Gohan vs Goku Black",
-        category: "animation",
-        img: GohanvsBlack,
-        video: "https://www.youtube.com/watch?v=e-2fx5O60rg",
-        badge: "2D Animation", 
-    },
-    {
-        title: "Frieza, Cell, vs Broly",
-        category: "animation",
-        img: FCvsB,
-        video: "https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s",
-        badge: "2D Animation", 
-    },
-    {
-        title: "Goku vs Bardock",
-        category: "animation",
-        img: GokuvsBardock,
-        video: "https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s",
-        badge: "2D Animation", 
-    },
-    {
-        title: "Pepsiman vs Kefla",
-        category: "animation",
-        img: PepsimanVsKefla,
-        video: "https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s",
-        badge: "2D Animation", 
-    },
-    
-    //Illustrations
-     {
-        title: "Spiclone OC",
-        category: "other",
-        img: SpicIllustration,
-        badge: "Illustration", 
-    },
-    // {
-    //     title: "Matcha OC",
-    //     category: "other",
-    //     img: matcha,
-    //     badge: "Illustration", 
-    // },
-    {
-        title: "OC",
-        category: "other",
-        img: ocArt,
-        badge: "Illustration", 
-    },
-    {
-        title: "Goku",
-        category: "other",
-        img: gokuArt,
-        badge: "Illustration", 
-    },
-]
+  {
+    title: 'Corumed — Homepage',
+    category: 'development',
+    img: HomepageImg,
+    badge: 'Featured Project',
+    featured: true,
+    description:
+      'A responsive e-commerce capstone interface focused on clear navigation, product discovery, and an approachable healthcare shopping experience.',
+    stack: ['Web Design', 'Front-End', 'UI/UX'],
+  },
+  {
+    title: 'Corumed — Products',
+    category: 'development',
+    img: ProductsImg,
+    badge: 'Capstone Project',
+    featured: true,
+    description:
+      'Product browsing interface created as part of the Corumed capstone project, with an emphasis on structured content and usability.',
+    stack: ['Front-End', 'UI Design'],
+  },
+  {
+    title: 'Corumed — Orders',
+    category: 'development',
+    img: OrdersImg,
+    badge: 'Capstone Project',
+    description:
+      'Order-management interface designed to organize transaction information into a cleaner, easier-to-review workflow.',
+    stack: ['Front-End', 'UI Design'],
+  },
+  {
+    title: 'Simple Login Page',
+    category: 'development',
+    img: SimpleLoginPage,
+    badge: 'Vue.js',
+    description:
+      'A focused Vue.js interface exercise exploring component structure, responsive layout, and form presentation.',
+    stack: ['Vue.js', 'CSS'],
+    repo: 'https://github.com/RaynGH/LoginPageVue',
+  },
+  {
+    title: 'Todo App',
+    category: 'development',
+    img: TodoApp,
+    badge: 'Vue.js',
+    description:
+      'A lightweight task-management project built to practice Vue.js state handling and everyday interface interactions.',
+    stack: ['Vue.js', 'JavaScript'],
+    repo: 'https://github.com/RaynGH/Todo-appVue',
+  },
+  {
+    title: 'Gohan vs Goku Black',
+    category: 'animation',
+    img: GohanvsBlack,
+    badge: '2D Animation',
+    featured: true,
+    description:
+      'Sprite-based action animation focused on combat pacing, posing, impact, and character-driven movement.',
+    stack: ['Sprite Animation', 'Action Choreography'],
+    video: 'https://www.youtube.com/watch?v=e-2fx5O60rg',
+  },
+  {
+    title: 'Frieza, Cell vs Broly',
+    category: 'animation',
+    img: FCvsB,
+    badge: '2D Animation',
+    featured: true,
+    description:
+      'A high-energy sprite animation combining multiple characters, effects, timing, and cinematic fight choreography.',
+    stack: ['Sprite Animation', 'Effects'],
+    video: 'https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s',
+  },
+  {
+    title: 'Goku vs Bardock',
+    category: 'animation',
+    img: GokuvsBardock,
+    badge: '2D Animation',
+    description:
+      'A character-versus-character animation built around readable action, transitions, and dramatic timing.',
+    stack: ['Sprite Animation', 'Fight Choreography'],
+    video: 'https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s',
+  },
+  {
+    title: 'Pepsiman vs Kefla',
+    category: 'animation',
+    img: PepsimanVsKefla,
+    badge: '2D Animation',
+    description:
+      'A stylized crossover animation combining humor, sprite work, and fast-paced action sequencing.',
+    stack: ['Sprite Animation', 'Compositing'],
+    video: 'https://www.youtube.com/watch?v=SXvjhHey3Nc&t=1s',
+  },
+  {
+    title: 'Spiclone OC',
+    category: 'illustration',
+    img: SpicIllustration,
+    badge: 'Illustration',
+    description:
+      'Original-character illustration exploring silhouette, costume design, and stylized character presentation.',
+    stack: ['Character Design', 'Digital Art'],
+  },
+  {
+    title: 'Original Character',
+    category: 'illustration',
+    img: ocArt,
+    badge: 'Illustration',
+    description:
+      'Personal character artwork focused on shape language, expression, and visual identity.',
+    stack: ['Character Design', 'Illustration'],
+  },
+  {
+    title: 'Goku Illustration',
+    category: 'illustration',
+    img: gokuArt,
+    badge: 'Illustration',
+    description:
+      'Fan illustration created as a study in stylized anatomy, rendering, and character expression.',
+    stack: ['Illustration', 'Fan Art'],
+  },
+];
 
 const TABS = [
-    {
-        key: "all", label: "All"
-    },
-    {
-        key: "web", label: "Web"
-    },
-    {
-        key: "animation", label: "Animations"
-    },
-    {
-        key: "other", label: "Others"
-    },
-]
+  { key: 'featured', label: 'Featured' },
+  { key: 'development', label: 'Development' },
+  { key: 'animation', label: 'Animation' },
+  { key: 'illustration', label: 'Illustration' },
+  { key: 'all', label: 'All Work' },
+];
 
 function Projects() {
+  const [active, setActive] = useState('featured');
+  const [lightBox, setLightBox] = useState(null);
 
-    const [active, setActive] = useState("all");
-    const [lightBox, setLightBox] = useState(null);
+  const filteredProjects = useMemo(() => {
+    if (active === 'all') return PROJECTS;
+    if (active === 'featured') return PROJECTS.filter((project) => project.featured);
+    return PROJECTS.filter((project) => project.category === active);
+  }, [active]);
 
-    const filtered = useMemo (() => {
-        if (active === "all") 
-            return PROJECTS;
-        return PROJECTS.filter(p => p.category === active);
-    }, [active])
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setLightBox(null);
+    };
 
-    useEffect(() => {
-        
-        const onKey = (e) => e.key === "Escape" && setLightBox(null);
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, []);
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   return (
-    <div>
-        <section id="projects" className="py-20 dark:bg-[#0e1421] bg-[#f3f3f3] text-gray-300 rounded-2xl shadow-xl">
-          <div className="max-w-6xl mx-auto px-6">
-            <header className="text-center mb-8">
-              <h2 className="text-3xl font-bold dark:text-white text-green-500">Projects</h2>
-              <p className="text-gray-400 mt-2">User interfaces & 2D animation work.</p>
+    <div className="mx-auto max-w-6xl">
+      <header className="mb-10 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+          Selected Projects
+        </p>
+        <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">
+          Development, animation, and visual work.
+        </h2>
+        <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600 dark:text-gray-400">
+          A curated mix of technical and creative projects. Featured work appears first,
+          while the filters let you explore each discipline in more detail.
+        </p>
 
-              {/* Tabs */}
-              <nav className="mt-6 inline-flex flex-wrap justify-center gap-2 rounded-full dark:bg-white/5 p-1 bg-gray-200/50">
-                {TABS.map(t => {
-                  const isActive = active === t.key;
-                  return (
-                    <button
-                      key={t.key}
-                      onClick={() => setActive(t.key)}
-                      className={`px-4 py-2 rounded-full text-sm transition
-                        ${isActive
-                          ? "dark:bg-[#101a2a] bg-[#22c55e] dark:text-yellow-400 text-white ring-1 ring-green-500/30 dark:ring-yellow-400/30"
-                          : "text-gray-400 dark:hover:text-yellow-400 hover:text-green-500"}`}
-                    >
-                      {t.label}
-                    </button>
-                  );
-                })}
-              </nav>
-            </header>
+        <nav
+          className="mt-8 flex flex-wrap gap-2"
+          aria-label="Project filters"
+        >
+          {TABS.map((tab) => {
+            const isActive = active === tab.key;
 
-            {/* Grid */}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-              {filtered.map((p) => (
-                <article
-                  key={p.title}
-                  className="group relative overflow-hidden rounded-2xl dark:bg-[#101a2a] bg-[#FFFFFF]  border border-white/20 dark:hover:border-yellow-400/40 hover:border-green-800 transition shadow-lg"
-                >
-                  <button
-                    onClick={() => setLightBox({ img: p.img, title: p.title })}
-                    className="block w-full"
-                    aria-label={`Open preview: ${p.title}`}
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActive(tab.key)}
+                aria-pressed={isActive}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-yellow-300 ${
+                  isActive
+                    ? 'border-green-500 bg-green-500 text-white shadow-sm dark:border-yellow-300 dark:bg-yellow-300 dark:text-gray-900'
+                    : 'border-gray-200 bg-white text-gray-600 hover:border-green-500/40 hover:text-green-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:border-yellow-300/40 dark:hover:text-yellow-300'
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </nav>
+      </header>
+
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {filteredProjects.map((project) => (
+          <article
+            key={project.title}
+            className={`group flex h-full flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-[#101a2a] ${
+              project.featured
+                ? 'border-green-500/25 dark:border-yellow-300/20'
+                : 'border-gray-200 dark:border-white/10'
+            }`}
+          >
+            <button
+              type="button"
+              onClick={() => setLightBox({ img: project.img, title: project.title })}
+              className="relative block w-full overflow-hidden text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-500 dark:focus-visible:ring-yellow-300"
+              aria-label={`Open preview: ${project.title}`}
+            >
+              <div className="aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-gray-950/30">
+                <img
+                  src={project.img}
+                  alt={project.title}
+                  className={`h-full w-full transition-transform duration-500 group-hover:scale-[1.03] ${
+                    project.category === 'illustration' ? 'object-contain' : 'object-cover'
+                  }`}
+                />
+              </div>
+
+              {project.featured && (
+                <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-gray-950/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md">
+                  Featured
+                </span>
+              )}
+            </button>
+
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-green-600 dark:text-yellow-300">
+                    {project.badge}
+                  </p>
+                  <h3 className="mt-2 text-xl font-bold leading-snug text-gray-900 dark:text-white">
+                    {project.title}
+                  </h3>
+                </div>
+              </div>
+
+              <p className="mt-4 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                {project.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.stack.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-medium text-gray-600 dark:bg-white/5 dark:text-gray-400"
                   >
-                    <div className="relative w-full overflow-hidden rounded-t-2xl">
-                      <img
-                        src={p.img}
-                        alt={p.title}
-                            className={`w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105
-                            ${p.category === "others" ? "object-contain bg-[#0e1421]" : "object-cover"}`}
-                      />
-                    </div>
-                  </button>
+                    {item}
+                  </span>
+                ))}
+              </div>
 
-                  {/* Content */}
-                  <div className="p-4">
-                    <div className="flex items-center justify-between">
-                      <p className="dark:text-white text-gray-800/35 text-[13px] font-semibold">{p.title}</p>
-                      {p.badge && (
-                        <span className="text-[10px] text-center uppercase tracking-wide px-2 py-1 rounded-full dark:bg-yellow-400/15 bg-green-400/15 dark:text-yellow-300 text-green-500 border dark:border-yellow-400/30
-                        border-green-400/30">
-                          {p.badge}
-                        </span>
-                      )}
-                    </div>
+              {(project.repo || project.video) && (
+                <div className="mt-auto flex items-center gap-4 pt-6">
+                  {project.repo && (
+                    <a
+                      href={project.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 transition hover:text-green-600 dark:text-gray-300 dark:hover:text-yellow-300"
+                    >
+                      <FaGithub className="h-4 w-4" />
+                      View Code
+                    </a>
+                  )}
 
-                    {/* Actions */}
-                    <div className="mt-3 flex items-center gap-3">
-                      {p.repo && (
-                        <a
-                          href={p.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="ml-auto inline-flex items-center gap-2 text-sm dark:text-gray-300 dark:hover:text-yellow-400 transition text-gray-800"
-                        >
-                          <FaGithub className="w-4 h-4" />
-                          Code
-                        </a>
-                      )}
-                      {p.video && (
-                        <a
-                          href={p.video}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="ml-auto inline-flex items-center gap-2 text-sm dark:text-gray-300 dark:hover:text-yellow-400 transition text-gray-800"
-                        >
-                          <FaPlay className="w-4 h-4" />
-                          Watch
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                  {project.video && (
+                    <a
+                      href={project.video}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 transition hover:text-green-600 dark:text-gray-300 dark:hover:text-yellow-300"
+                    >
+                      <FaPlay className="h-3.5 w-3.5" />
+                      Watch
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
 
-                  {/* Hover overlay */}
-                  <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-                </article>
-              ))}
+      {lightBox && (
+        <div
+          className="fixed inset-0 z-[70] grid place-items-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={() => setLightBox(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Preview of ${lightBox.title}`}
+        >
+          <div
+            className="w-full max-w-5xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={lightBox.img}
+              alt={lightBox.title}
+              className="mx-auto max-h-[82vh] max-w-full rounded-2xl object-contain shadow-2xl"
+            />
+            <div className="mt-4 flex items-center justify-between gap-4 text-sm text-gray-300">
+              <span>{lightBox.title}</span>
+              <button
+                type="button"
+                onClick={() => setLightBox(null)}
+                className="rounded-full border border-white/20 px-4 py-2 font-medium transition hover:bg-white/10"
+              >
+                Close
+              </button>
             </div>
           </div>
-
-          {/* Lightbox modal */}
-          {lightBox && (
-            <div
-              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm grid place-items-center p-4"
-              onClick={() => setLightBox(null)}
-              role="dialog" aria-modal="true"
-            >
-              <div className="max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
-                <img src={lightBox.img} alt={lightBox.title}  className="max-h-[90vh] w-auto max-w-full mx-auto rounded-xl object-contain" />
-                <div className="mt-2 text-center text-sm text-gray-300">{lightBox.title}</div>
-              </div>
-            </div>
-          )}
-        </section>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Projects
+export default Projects;
