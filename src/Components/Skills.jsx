@@ -1,109 +1,158 @@
-import React from 'react'
-import { BsFillPatchCheckFill } from "react-icons/bs";
 import { useMemo, useState } from 'react';
+import {
+  FaCode,
+  FaDatabase,
+  FaPalette,
+  FaSearch,
+  FaTools,
+  FaWordpress,
+} from 'react-icons/fa';
 
-const SKILLS = [
-  // --- Frontend
-  { name: "HTML", note: "Advance", level: 5, category: "frontend" },
-  { name: "CSS", note: "Advance", level: 4, category: "frontend" },
-  { name: "JavaScript", note: "Intermediate", level: 4, category: "frontend" },
-  { name: "React", note: "Intermediate", level: 3, category: "frontend" },
-  { name: "VueJS", note: "Intermediate", level: 3, category: "frontend" },
-  
-  // --- Backend
-  { name: "MongoDB", note: "Basic", level: 2, category: "backend" },
-  { name: "MySQL", note: "Intermediate", level: 3, category: "backend" },
-
-  // -- Others
-  { name: "Canva", note: "Advance", level: 4, category: "others" },
-  { name: "Photoshop", note: "Advance", level: 4, category: "others" },
-  { name: "Microsoft 365 Tools", note: "Advance", level: 4, category: "others" },
-  { name: "Capcut", note: "Advance", level: 4, category: "others" },
-
+const SKILL_GROUPS = [
+  {
+    key: 'web',
+    label: 'Web Development',
+    icon: FaCode,
+    summary:
+      'Building and improving responsive web interfaces with modern front-end tools and practical development workflows.',
+    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Vue.js', 'Responsive Design'],
+  },
+  {
+    key: 'wordpress',
+    label: 'WordPress & Web Ops',
+    icon: FaWordpress,
+    summary:
+      'Publishing, updating, and quality-checking production website content with an emphasis on usability and consistency.',
+    skills: ['WordPress', 'Elementor', 'Content Implementation', 'Page QA', 'Internal Linking'],
+  },
+  {
+    key: 'seo',
+    label: 'SEO & Content',
+    icon: FaSearch,
+    summary:
+      'Supporting organic growth through structured keyword research, on-page improvements, content planning, and internal linking.',
+    skills: ['Keyword Research', 'On-Page SEO', 'Content Briefs', 'Internal Linking', 'Content QA'],
+  },
+  {
+    key: 'data',
+    label: 'Data & Backend',
+    icon: FaDatabase,
+    summary:
+      'Working with databases and application data while maintaining a practical understanding of backend fundamentals.',
+    skills: ['MySQL', 'MongoDB', 'SQL', 'Microsoft Access'],
+  },
+  {
+    key: 'creative',
+    label: 'Creative Production',
+    icon: FaPalette,
+    summary:
+      'Creating digital visuals, motion work, and 2D animation for personal, client, and collaborative projects.',
+    skills: ['Aseprite', 'Adobe Animate', 'After Effects', 'Photoshop', 'Canva', 'CapCut'],
+  },
+  {
+    key: 'workflow',
+    label: 'Productivity & Support',
+    icon: FaTools,
+    summary:
+      'Using everyday productivity and troubleshooting tools to support teams, organize work, and solve operational issues.',
+    skills: ['Microsoft 365', 'Google Sheets', 'Technical Support', 'Troubleshooting', 'Documentation'],
+  },
 ];
 
-const TABS = [
-  { key: "all", label: "All" },
-  { key: "frontend", label: "Frontend" },
-  { key: "backend", label: "Backend" },
-  { key: "others", label: "Others" },
+const FILTERS = [
+  { key: 'all', label: 'All Capabilities' },
+  { key: 'web', label: 'Web' },
+  { key: 'seo', label: 'SEO' },
+  { key: 'creative', label: 'Creative' },
+  { key: 'workflow', label: 'Support' },
 ];
 
 function Skills() {
+  const [active, setActive] = useState('all');
 
-    const [active, setActive] = useState("all");
-    const filtered = useMemo(() => {
-    if (active === "all") return SKILLS;
-    return SKILLS.filter((s) => s.category === active);
-    }, [active]);
+  const filteredGroups = useMemo(() => {
+    if (active === 'all') return SKILL_GROUPS;
+    if (active === 'web') {
+      return SKILL_GROUPS.filter((group) => ['web', 'wordpress', 'data'].includes(group.key));
+    }
+    return SKILL_GROUPS.filter((group) => group.key === active);
+  }, [active]);
 
   return (
-    <div>
-        <section id="skills" className="py-20 dark:bg-[#0e1421] bg-[#f3f3f3] rounded-2xl text-gray-300 shadow-xl">
-            <div className="max-w-6xl mx-auto px-6">
-                <header className="text-center mb-10">
-                    <h2 className="text-3xl font-bold dark:text-white text-green-500">My Skills</h2>
-          <nav
-            role="tablist"
-            aria-label="Skill categories"
-            className="mt-6 inline-flex flex-wrap justify-center gap-2 rounded-full dark:bg-white/5 p-1 bg-gray-200/50"
-          >
-            {TABS.map((tab) => {
-              const isActive = active === tab.key;
-              return (
-                <button
-                  key={tab.key}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActive(tab.key)}
-                  className={`px-4 py-2 rounded-full text-sm transition ${
-                    isActive
-                      ? "dark:bg-[#101a2a] bg-[#22c55e] dark:text-yellow-400 text-white ring-1 ring-green-500/30 dark:ring-yellow-400/30"
-                      : "text-gray-400 dark:hover:text-yellow-400 hover:text-green-500"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
-          </nav>
-        </header>
+    <div className="mx-auto max-w-6xl">
+      <header className="mb-10 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+          Skills & Tools
+        </p>
+        <h2 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">
+          Capabilities built through real projects and client work.
+        </h2>
+        <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600 dark:text-gray-400">
+          I work across development, website operations, SEO, creative production, and technical support.
+          These are the areas and tools I use to turn ideas and tasks into practical digital work.
+        </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((skill) => (
+        <nav className="mt-8 flex flex-wrap gap-2" aria-label="Skill filters">
+          {FILTERS.map((filter) => {
+            const isActive = active === filter.key;
+
+            return (
+              <button
+                key={filter.key}
+                type="button"
+                onClick={() => setActive(filter.key)}
+                aria-pressed={isActive}
+                className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-yellow-300 ${
+                  isActive
+                    ? 'border-green-500 bg-green-500 text-white shadow-sm dark:border-yellow-300 dark:bg-yellow-300 dark:text-gray-900'
+                    : 'border-gray-200 bg-white text-gray-600 hover:border-green-500/40 hover:text-green-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-400 dark:hover:border-yellow-300/40 dark:hover:text-yellow-300'
+                }`}
+              >
+                {filter.label}
+              </button>
+            );
+          })}
+        </nav>
+      </header>
+
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {filteredGroups.map((group) => {
+          const Icon = group.icon;
+
+          return (
             <article
-              key={skill.name}
-              className="dark:bg-[#101a2a] bg-[#FFFFFF] shadow-lg rounded-xl p-5 border border-white/20 dark:hover:border-yellow-400 hover:border-green-800 hover:border-2 md:hover:-translate-y-0.5 transition"
+              key={group.key}
+              className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-500/30 hover:shadow-xl dark:border-white/10 dark:bg-[#101a2a] dark:hover:border-yellow-300/25"
             >
-              <div className="flex items-center gap-3 mb-1 lg:text-sm">
-                <span className="inline-block w-3.5 h-3.5 rounded-md bg-gradient-to-b dark:from-yellow-400 dark:to-amber-300 from-green-500 to-emerald-300 shadow-inner" />
-                <h3 className="dark:text-white text-gray-800/35 font-semibold">{skill.name}</h3>
+              <div className="flex items-center gap-4">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-green-50 text-green-600 dark:bg-yellow-300/10 dark:text-yellow-300">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                  {group.label}
+                </h3>
               </div>
 
-              {skill.note && (
-                <p className="text-sm text-gray-500 mb-3">{skill.note}</p>
-              )}
+              <p className="mt-5 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                {group.summary}
+              </p>
 
-              <div
-                className="flex gap-1.5"
-                aria-label={`Proficiency: ${skill.level} out of 5`}
-              >
-                {Array.from({ length: 5 }).map((_, i) => (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
                   <span
-                    key={i}
-                    className={`w-2.5 h-2.5 rounded-full ${
-                      i < skill.level ? "dark:bg-yellow-400 bg-green-400" : "dark:bg-white/25 bg-gray-300/60 "
-                    }`}
-                  />
+                    key={skill}
+                    className="rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 dark:bg-white/5 dark:text-gray-300"
+                  >
+                    {skill}
+                  </span>
                 ))}
               </div>
             </article>
-             ))}
-            </div>
-        </div>
-        </section>
+          );
+        })}
+      </div>
     </div>
-  )
+  );
 }
-    
-    export default Skills
+
+export default Skills;

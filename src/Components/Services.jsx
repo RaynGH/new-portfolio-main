@@ -1,240 +1,129 @@
-import { React, useState, useMemo, useEffect} from 'react'
-import { FaGlobe, FaTools, FaPencilRuler, FaPhotoVideo, FaVideo} from "react-icons/fa";
+import {
+  FaCode,
+  FaHeadset,
+  FaPhotoVideo,
+  FaSearch,
+  FaVideo,
+  FaWordpress,
+} from 'react-icons/fa';
 
-const SERVICES = [
-    {
-        id: "web-dev",
-        title:  "Web Development",
-        icon: FaGlobe,
-        summary: "Modern, responsive websites and apps.",
-        bullets: ["Responsive UI", "Frameworks", "API Integration"],
-        tools: ["React", "Tailwind", "Vue", "Bootstrap"],
-        timeline: "2-6 weeks",
-        badge: "Popular",
-    },
-    {
-        id: "it-support",
-        title:  "IT Support Service",
-        icon: FaTools,
-        summary: "Setup, Troubleshooting, and Customer Support",
-        bullets: ["PC Setup", "Monitoring", "Email setup"],
-        tools: ["Windows", "M365", "Google Workspace"],
-        timeline: "As needed",
-    },
-    {
-        id: "uiux",
-        title:  "UI/UX Design",
-        icon: FaPencilRuler,
-        summary: "Clean interfaces with delightful flows.",
-        bullets: ["Wireframes", "Prototyping", "Design Systems"],
-        tools: ["Figma", "Framer"],
-        timeline: "1-3 weeks",
-    },
-    {
-        id: "pixel-anim",
-        title:  "Pixel Animation",
-        icon: FaPhotoVideo,
-        summary: "2D Pixel Animation for games & media.",
-        bullets: ["Sprite Sheets", "VFX Loops", "Youtube"],
-        tools: ["Aseprite", "After Effects", "Adobe Animate"],
-        timeline: "1-4 weeks",
-    },
-    {
-        id: "video-edit",
-        title:  "Video Editing",
-        icon: FaVideo,
-        summary: "Professional editing for social media, marketing, and storytelling",
-        bullets: ["Short-form Reels & Tiktoks", "Youtube Video Editing", "Color Grading & Sound Design"],
-        tools: ["After Effects", "Premiere Pro", "Capcut"],
-        timeline: "1-3 weeks",
-    },
+const EXPERTISE = [
+  {
+    id: 'web-development',
+    title: 'Web Development',
+    icon: FaCode,
+    description:
+      'Building and improving responsive interfaces with a focus on usability, structure, and maintainable front-end implementation.',
+    outcomes: ['Responsive interfaces', 'Front-end implementation', 'UI improvements'],
+  },
+  {
+    id: 'wordpress-operations',
+    title: 'WordPress & Website Operations',
+    icon: FaWordpress,
+    description:
+      'Supporting live websites through content implementation, Elementor updates, page QA, formatting, and ongoing site improvements.',
+    outcomes: ['WordPress publishing', 'Elementor updates', 'Website QA'],
+  },
+  {
+    id: 'seo-content',
+    title: 'SEO & Content Operations',
+    icon: FaSearch,
+    description:
+      'Helping websites become easier to discover and navigate through keyword research, content planning, internal linking, and on-page optimization.',
+    outcomes: ['Keyword research', 'Internal linking', 'Content optimization'],
+  },
+  {
+    id: 'technical-support',
+    title: 'Technical Support',
+    icon: FaHeadset,
+    description:
+      'Troubleshooting user and workplace technology issues with clear communication, documentation, and practical problem solving.',
+    outcomes: ['Troubleshooting', 'Microsoft 365 support', 'User assistance'],
+  },
+  {
+    id: 'animation',
+    title: '2D & Pixel Animation',
+    icon: FaPhotoVideo,
+    description:
+      'Creating sprite-based character animation, action sequences, effects, and motion work for games, media, and creative collaborations.',
+    outcomes: ['Sprite animation', 'Character motion', 'Action choreography'],
+  },
+  {
+    id: 'creative-production',
+    title: 'Creative Production',
+    icon: FaVideo,
+    description:
+      'Producing visual and short-form digital content that supports social media, marketing, presentations, and online brand communication.',
+    outcomes: ['Digital graphics', 'Video editing', 'Social content'],
+  },
 ];
 
 function Services() {
-
-    const [openId, setOpenId] = useState(null);
-
-    useEffect(() => {
-        const hash = new URLSearchParams(window.location.hash.replace("#", "?"));
-        const id = hash.get("service");
-        if(id) setOpenId(id);
-    }, []);
-
-    const service = useMemo(() => SERVICES.find(s => s.id === openId) || null,
-        [openId]
-    );
-
-    
   return (
-    <div>
-         <section id="services" className="py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <header className="text-center mb-8">
-          <p className="dark:text-yellow-400 text-green-400 font-semibold">My Services</p>
-          <h2 className="text-3xl md:text-4xl font-bold dark:text-white text-gray-400/50">What I can Offer</h2>
-        </header>
+    <div className="mx-auto max-w-6xl">
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+            What I Do
+          </p>
+          <h2 className="mt-3 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl dark:text-white">
+            Technical execution with a creative edge.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-8 text-gray-600 dark:text-gray-400">
+            My work sits across web, content, support, and creative production. That range lets me contribute not only to how something looks, but also to how it works, how it is maintained, and how people find and use it.
+          </p>
 
-        {/* grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch auto-rows-[1fr]">
-          {SERVICES.map((s) => (
-            <article
-              key={s.id}
-              className="relative h-full flex flex-col rounded-2xl dark:bg-[#0f2038] bg-[#f3f3f3] border border-white/10
-              p-6 shadow-lg hover:shadow-xl dark:hover:border-yellow-400/30 hover:border-green-400/30 transition"
-            >
-              {s.badge && (
-                <span className="absolute -top-2 -right-3 rounded-full dark:bg-yellow-400 bg-green-500 dark:text-[#0b1321] text-white text-xs font-semibold px-3 py-1 shadow">
-                  {s.badge}
-                </span>
-              )}
-
-              <div className="dark:text-yellow-400 text-green-500 text-4xl mb-4">
-                <s.icon className="transition-transform group-hover:-translate-y-0.5" />
-              </div>
-
-              <h3 className="dark:text-white text-green-500 font-semibold text-lg">{s.title}</h3>
-              <p className="dark:text-gray-300 text-gray-800 text-sm mt-1">{s.summary}</p>
-
-              {/* quick bullets */}
-              <ul className="mt-4 space-y-1 text-sm dark:text-gray-400 text-gray-800">
-                {s.bullets.slice(0, 3).map((b, i) => (
-                  <li key={i} className="flex gap-2 items-start">
-                    <span className="mt-[6px] h-1.5 w-1.5 rounded-full dark:bg-yellow-400/80 bg-green-400/80" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              {/* tool chips + meta */}
-              <div className="mt-4 flex flex-wrap gap-2">
-                {s.tools.map((t) => (
-                  <span key={t} className="text-[11px] px-2 py-1 rounded-full dark:bg-white/5 border
-                   dark:border-white/10 dark:text-gray-300 bg-green-500 text-white">
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-3 text-xs text-gray-400">Timeline: {s.timeline}</p>
-
-              {/* actions */}
-              <div className="mt-auto pt-6 flex items-center gap-3">
-                <button
-                  onClick={() => setOpenId(s.id)}
-                  className="rounded-full border dark:border-yellow-400 px-4 py-2 
-                  dark:text-yellow-300 text-sm dark:hover:bg-yellow-400 border-green-500 
-                  text-green-800 hover:bg-green-500 dark:hover:text-[#101a2a] hover:text-white transition"
-                >
-                  Details
-                </button>
-                <a
-                  href="#contact"
-                  className="text-sm dark:text-gray-300 text-gray-800 dark:hover:text-yellow-400
-                  hover:text-green-500"
-                >
-                  Start a project →
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      {/* modal / drawer */}
-      {service && (
-        <ServiceDialog service={service} onClose={() => setOpenId(null)} />
-      )}
-    </section>
-
-    </div>
-  )
-}
-
-
-function ServiceDialog({ service, onClose}) {
-    useEffect(() => {
-        const onKey = (e) => e.key === "Escape" && onClose();
-        document.addEventListener("keydown", onKey);
-        return () => document.removeEventListener("keydown", onKey);   
-    }, [onClose]);
-
-    return (
-         <div className="fixed inset-0 z-50">
-      {/* backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      {/* panel */}
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="svc-title"
-        className="
-          absolute left-1/2 -translate-x-1/2 w-[92%] max-w-3xl
-          bottom-0 sm:top-1/2 sm:bottom-auto sm:-translate-y-1/2
-          rounded-t-2xl sm:rounded-2xl
-          dark:bg-[#0f2038] bg-[#f3f3f3] bg border border-white/10 shadow-xl p-6
-        "
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-start justify-between gap-6">
-          <div className="dark:text-yellow-400 text-green-400 text-3xl">
-            <service.icon />
-          </div>
-          <button
-            onClick={onClose}
-            aria-label="Close"
-            className="ml-auto rounded-full border border-white/10 px-3 py-1 text-sm text-gray-500 dark:hover:text-white hover:text-green-500"
-          >
-            Close
-          </button>
-        </div>
-
-        <h3 id="svc-title" className="dark:text-white text-green-400 text-2xl font-semibold mt-2">
-          {service.title}
-        </h3>
-        <p className="dark:text-gray-300 text-gray-800 mt-2">{service.summary}</p>
-
-        <div className="mt-4 grid sm:grid-cols-2 gap-4">
-          <div>
-            <h4 className="dark:text-gray-200 text-gray-500 font-medium mb-2">What you get</h4>
-            <ul className="space-y-2 dark:text-gray-300 text-gray-800 text-sm">
-              {service.bullets.map((b, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="mt-[7px] h-1.5 w-1.5 rounded-full dark:bg-yellow-400/80 bg-green-400/80" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="dark:text-gray-200 text-gray-400 font-medium mb-2">Details</h4>
-            <p className="text-sm dark:text-gray-300 text-gray-800">
-              Timeline: <span className="dark:text-gray-100 text-gray-400">{service.timeline}</span><br/>
-              Stack: {service.tools.join(", ")}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 flex flex-wrap items-center gap-3">
           <a
             href="#contact"
-            className="rounded-full border dark:border-yellow-400 px-4 py-2 dark:text-yellow-300 
-            text-sm dark:hover:bg-yellow-400 border-green-500 hover:bg-green-500 dark:hover:text-[#101a2a]
-            hover:text-white transition"
+            className="mt-8 inline-flex items-center justify-center rounded-full border border-green-500 px-5 py-2.5 text-sm font-semibold text-green-600 transition hover:bg-green-500 hover:text-white dark:border-yellow-300 dark:text-yellow-300 dark:hover:bg-yellow-300 dark:hover:text-gray-900"
           >
-            Get a quote
+            Let&apos;s Work Together
           </a>
-          <a
-            href="#projects"
-            className="text-sm dark:text-gray-300 text-gray-800 dark:hover:text-yellow-400 hover:text-green-400"
-          >
-            View related projects →
-          </a>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          {EXPERTISE.map((item, index) => {
+            const Icon = item.icon;
+
+            return (
+              <article
+                key={item.id}
+                className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-500/30 hover:shadow-xl dark:border-white/10 dark:bg-[#101a2a] dark:hover:border-yellow-300/25"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-green-50 text-green-600 transition group-hover:bg-green-100 dark:bg-yellow-300/10 dark:text-yellow-300 dark:group-hover:bg-yellow-300/15">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-xs font-semibold tracking-[0.18em] text-gray-300 dark:text-white/15">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+
+                <h3 className="mt-5 text-lg font-bold leading-snug text-gray-900 dark:text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                  {item.description}
+                </p>
+
+                <ul className="mt-5 space-y-2.5">
+                  {item.outcomes.map((outcome) => (
+                    <li
+                      key={outcome}
+                      className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400"
+                    >
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green-500 dark:bg-yellow-300" />
+                      {outcome}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
         </div>
       </div>
     </div>
-    );
+  );
 }
 
-export default Services
+export default Services;
