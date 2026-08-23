@@ -39,14 +39,30 @@ const CLIENTS = [
 function Homepage() {
   const [darkMode, setDarkMode] = useState(true);
 
+  const handleHeroPointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const pointerX = ((event.clientX - rect.left) / rect.width) * 100;
+    const pointerY = ((event.clientY - rect.top) / rect.height) * 100;
+
+    event.currentTarget.style.setProperty('--pointer-x', `${pointerX}%`);
+    event.currentTarget.style.setProperty('--pointer-y', `${pointerY}%`);
+  };
+
   return (
     <div className={darkMode ? 'dark' : ''}>
       <BottomDock />
       <Sidebar />
 
-      <main className="min-h-screen bg-white px-6 sm:px-10 md:px-16 lg:px-28 xl:px-44 2xl:px-64 dark:bg-gray-900 transition-colors duration-200">
-        <section id="home" className="min-h-screen flex flex-col">
-          <nav className="py-8 sm:py-10 flex items-center justify-between">
+      <main className="portfolio-shell min-h-screen px-6 transition-colors duration-300 sm:px-10 md:px-16 lg:px-28 xl:px-44 2xl:px-64">
+        <section
+          id="home"
+          className="hero-atmosphere relative min-h-screen overflow-hidden flex flex-col"
+          onPointerMove={handleHeroPointerMove}
+        >
+          <div className="hero-grid pointer-events-none absolute inset-0 -z-20" aria-hidden="true" />
+          <div className="hero-pointer-glow pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
+
+          <nav className="relative z-10 py-8 sm:py-10 flex items-center justify-between">
             <a
               href="#home"
               className="text-lg font-bold tracking-[0.2em] text-gray-900 dark:text-white"
@@ -58,13 +74,13 @@ function Homepage() {
               type="button"
               onClick={() => setDarkMode(!darkMode)}
               aria-label="Toggle light and dark mode"
-              className="grid h-10 w-10 place-items-center rounded-full border border-gray-200 text-gray-700 transition hover:border-green-500 hover:text-green-500 dark:border-white/10 dark:text-white dark:hover:border-yellow-300 dark:hover:text-yellow-300"
+              className="grid h-10 w-10 place-items-center rounded-full border border-gray-200/80 bg-white/45 text-gray-700 backdrop-blur-md transition hover:border-green-500 hover:text-green-500 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-yellow-300 dark:hover:text-yellow-300"
             >
               <MdSunny className="text-xl" />
             </button>
           </nav>
 
-          <div className="flex flex-1 items-center justify-center py-16 sm:py-24">
+          <div className="relative z-10 flex flex-1 items-center justify-center py-16 sm:py-24">
             <div className="max-w-4xl text-center">
               <p className="mb-5 text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-green-600 dark:text-yellow-300">
                 Web · Digital · Creative
@@ -86,7 +102,7 @@ function Homepage() {
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="#projects"
-                  className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-green-500 px-6 py-3 font-semibold text-white transition hover:bg-green-600 dark:bg-yellow-400 dark:text-gray-900 dark:hover:bg-yellow-300"
+                  className="inline-flex min-w-[160px] items-center justify-center rounded-full bg-green-500 px-6 py-3 font-semibold text-white shadow-lg shadow-green-500/10 transition hover:bg-green-600 dark:bg-yellow-400 dark:text-gray-900 dark:shadow-yellow-400/10 dark:hover:bg-yellow-300"
                 >
                   View My Work
                 </a>
@@ -94,7 +110,7 @@ function Homepage() {
                 <a
                   href={CV}
                   download="John_Averian_Oro_Resume"
-                  className="inline-flex min-w-[160px] items-center justify-center rounded-full border border-green-500 px-6 py-3 font-semibold text-green-600 transition hover:bg-green-500 hover:text-white dark:border-yellow-300 dark:text-yellow-300 dark:hover:bg-yellow-300 dark:hover:text-gray-900"
+                  className="inline-flex min-w-[160px] items-center justify-center rounded-full border border-green-500 bg-white/30 px-6 py-3 font-semibold text-green-600 backdrop-blur-sm transition hover:bg-green-500 hover:text-white dark:border-yellow-300 dark:bg-white/[0.025] dark:text-yellow-300 dark:hover:bg-yellow-300 dark:hover:text-gray-900"
                 >
                   Download CV
                 </a>
@@ -152,7 +168,7 @@ function Homepage() {
               {CLIENTS.map((client) => (
                 <article
                   key={client.name}
-                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-[#101a2a]"
+                  className="rounded-2xl border border-gray-200 bg-white/80 p-6 shadow-sm backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-[#101a2a]/90"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-600 dark:text-yellow-300">
                     Client
