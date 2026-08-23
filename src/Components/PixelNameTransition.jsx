@@ -16,7 +16,7 @@ function PixelNameTransition() {
   const particleLayerRef = useRef(null);
 
   useGSAP(
-    ({ contextSafe }) => {
+    (context, contextSafe) => {
       const root = rootRef.current;
       const clean = cleanRef.current;
       const pixel = pixelRef.current;
@@ -53,22 +53,22 @@ function PixelNameTransition() {
         const samplingCanvas = document.createElement('canvas');
         samplingCanvas.width = width;
         samplingCanvas.height = height;
-        const context = samplingCanvas.getContext('2d', { willReadFrequently: true });
+        const context2d = samplingCanvas.getContext('2d', { willReadFrequently: true });
 
-        if (!context) {
+        if (!context2d) {
           gsap.set(clean, { opacity: 1 });
           gsap.set(pixel, { display: 'none' });
           return;
         }
 
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = '#ffffff';
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.font = `${pixelStyle.fontWeight} ${pixelStyle.fontSize} ${pixelStyle.fontFamily}`;
-        context.fillText(NAME.toUpperCase(), width / 2, height / 2);
+        context2d.clearRect(0, 0, width, height);
+        context2d.fillStyle = '#ffffff';
+        context2d.textAlign = 'center';
+        context2d.textBaseline = 'middle';
+        context2d.font = `${pixelStyle.fontWeight} ${pixelStyle.fontSize} ${pixelStyle.fontFamily}`;
+        context2d.fillText(NAME.toUpperCase(), width / 2, height / 2);
 
-        const imageData = context.getImageData(0, 0, width, height);
+        const imageData = context2d.getImageData(0, 0, width, height);
         const sampleStep = Math.max(4, Math.round(width / 125));
         const candidates = [];
 
