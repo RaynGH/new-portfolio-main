@@ -101,9 +101,19 @@ body {
 
 .hero-name-particles {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
   overflow: visible;
+  visibility: visible;
+}
+
+.hero-name-particle {
+  position: absolute;
+  display: block;
+  border-radius: 1px;
+  box-shadow: 0 0 7px currentColor;
+  transform-origin: center;
+  will-change: transform, opacity;
 }
 
 @media (hover: none), (pointer: coarse) {
