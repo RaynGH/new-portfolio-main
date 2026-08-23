@@ -88,8 +88,14 @@ function Homepage() {
                 Web · Digital · Creative
               </p>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
-                John Averian Oro
+              <h1
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white"
+                aria-label="John Averian Oro"
+              >
+                <span className="hero-name-transition" aria-hidden="true">
+                  <span className="hero-name-clean">John Averian Oro</span>
+                  <span className="hero-name-pixel">John Averian Oro</span>
+                </span>
               </h1>
 
               <h2 className="mt-5 text-xl sm:text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300">
