@@ -1,147 +1,207 @@
-import React, { useState } from "react";
-import { MdMail} from "react-icons/md";
-function ContactMe() {
-  const [status, setStatus] = useState("idle");
+import { useState } from 'react';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-  // return the encoded string and close the function
+function ContactMe() {
+  const [status, setStatus] = useState('idle');
+
   const encode = (data) =>
     Object.keys(data)
-      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-      .join("&");
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("loading");
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setStatus('loading');
 
-    const form = e.currentTarget;
+    const form = event.currentTarget;
     const formData = new FormData(form);
 
     try {
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode({
-          "form-name": form.getAttribute("name"),
+          'form-name': form.getAttribute('name'),
           ...Object.fromEntries(formData),
         }),
       });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
       form.reset();
-      setStatus("success");
-    } catch (err) {
-      setStatus("error");
+      setStatus('success');
+    } catch (error) {
+      setStatus('error');
     }
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        {/* LEFT SIDE */}
-        <div className="text-center lg:text-left flex flex-col justify-center">
-          <h2 className="text-5xl font-bold text-green-500 dark:text-yellow-400 mb-10">Get in touch</h2>
-          <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed max-w-md mx-auto lg:mx-0 text-justify">
-            I’d love to hear about{" "}
-            <span className="dark:text-yellow-400 text-green-400 font-medium">opportunities</span>,
-            collaborations, or projects you’re passionate about.
-            Let’s connect and build something amazing together.
-          </p>
+    <div className="mx-auto max-w-6xl">
+      <div className="overflow-hidden rounded-3xl border border-gray-200 bg-gray-50 shadow-sm dark:border-white/10 dark:bg-[#0d1726]">
+        <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex flex-col justify-between p-7 sm:p-10 lg:p-12">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                Get In Touch
+              </p>
+              <h2 className="mt-3 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl dark:text-white">
+                Have a project, role, or collaboration in mind?
+              </h2>
+              <p className="mt-5 max-w-lg text-base leading-8 text-gray-600 dark:text-gray-400">
+                I’m open to opportunities across web, digital operations, creative work, and animation. Share what you’re working on and I’ll be glad to connect.
+              </p>
+            </div>
+
+            <div className="mt-10 space-y-3">
+              <a
+                href="mailto:guetaryan@gmail.com"
+                className="group flex items-center gap-3 text-sm font-medium text-gray-700 transition hover:text-green-600 dark:text-gray-300 dark:hover:text-yellow-300"
+              >
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-green-600 shadow-sm dark:bg-white/5 dark:text-yellow-300">
+                  <FaEnvelope className="h-4 w-4" />
+                </span>
+                guetaryan@gmail.com
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/john-averian-oro-b8ab41280/"
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-3 text-sm font-medium text-gray-700 transition hover:text-green-600 dark:text-gray-300 dark:hover:text-yellow-300"
+              >
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-green-600 shadow-sm dark:bg-white/5 dark:text-yellow-300">
+                  <FaLinkedin className="h-4 w-4" />
+                </span>
+                LinkedIn
+              </a>
+
+              <a
+                href="https://github.com/RaynGH"
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-3 text-sm font-medium text-gray-700 transition hover:text-green-600 dark:text-gray-300 dark:hover:text-yellow-300"
+              >
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-green-600 shadow-sm dark:bg-white/5 dark:text-yellow-300">
+                  <FaGithub className="h-4 w-4" />
+                </span>
+                GitHub
+              </a>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-200 bg-white p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-12 dark:border-white/10 dark:bg-[#101a2a]">
+            <form
+              name="portfolio-contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+            >
+              <input type="hidden" name="form-name" value="portfolio-contact" />
+
+              <p className="hidden">
+                <label>
+                  Don&apos;t fill this out: <input name="bot-field" />
+                </label>
+              </p>
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    placeholder="Your name"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-green-500 focus:ring-2 focus:ring-green-500/10 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-yellow-300 dark:focus:ring-yellow-300/10"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                    htmlFor="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    placeholder="you@company.com"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-green-500 focus:ring-2 focus:ring-green-500/10 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-yellow-300 dark:focus:ring-yellow-300/10"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <label
+                  className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  htmlFor="message"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  required
+                  placeholder="Tell me a little about the opportunity or project..."
+                  className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-green-500 focus:ring-2 focus:ring-green-500/10 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-yellow-300 dark:focus:ring-yellow-300/10"
+                />
+              </div>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="inline-flex items-center justify-center rounded-full bg-green-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-yellow-300 dark:text-gray-900 dark:hover:bg-yellow-200"
+                >
+                  {status === 'loading' ? 'Sending…' : 'Send Message'}
+                </button>
+
+                <p className="text-xs text-gray-500 dark:text-gray-500">
+                  Usually easiest to reach me by email.
+                </p>
+              </div>
+
+              {status === 'success' && (
+                <p
+                  className="mt-5 rounded-xl border border-green-500/20 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-400/20 dark:bg-green-400/10 dark:text-green-300"
+                  role="status"
+                >
+                  Thanks — your message was sent successfully.
+                </p>
+              )}
+
+              {status === 'error' && (
+                <p
+                  className="mt-5 rounded-xl border border-red-500/20 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-400/20 dark:bg-red-400/10 dark:text-red-300"
+                  role="alert"
+                >
+                  Something went wrong. Please try again or email me directly.
+                </p>
+              )}
+            </form>
+          </div>
         </div>
-
-        {/* RIGHT SIDE */}
-        <form
-          name="portfolio-contact"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
-          className="dark:bg-[#101a2a] bg-green-500 border border-white/10 rounded-2xl p-6 shadow-xl"
-        >
-          <input type="hidden" name="form-name" value="portfolio-contact" />
-          <p className="hidden">
-            <label>
-              Don’t fill this out: <input name="bot-field" />
-            </label>
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="name">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="w-full rounded-xl dark:bg-transparent bg-white border border-green-500 dark:border-yellow-500
-                  dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
-                focus:ring-green-500/20  text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
-                placeholder="Jane Doe"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="w-full rounded-xl dark:bg-transparent bg-white border border border-green-500  dark:border-yellow-500
-                 dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
-                focus:ring-green-500/20 text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
-                placeholder="jane@company.com"
-              />
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <label className="block text-sm dark:text-gray-400 text-white mb-1" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              required
-              className="w-full rounded-xl dark:bg-transparent bg-white border border-green-500  dark:border-yellow-500
-                dark:focus:border-yellow-400/40 focus:border-green-400/40 dark:focus:ring-yellow-400/20
-                focus:ring-green-500/20 text-gray-900 dark:text-white px-4 py-3 outline-none placeholder:text-gray-500/50"
-              placeholder="Write your message here…"
-            />
-          </div>
-
-          <div className="mt-6 flex items-center gap-3 flex-col sm:flex-row text-center sm:text-left">
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="inline-flex items-center justify-center bg-emerald-600 dark:bg-transparent rounded-full border dark:border-yellow-400 border-green-300 px-5 py-2.5
-                dark:text-yellow-300 text-white font-medium dark:hover:bg-yellow-400 hover:bg-green-800 hover:text-[#FFFFFF]
-                 dark:hover:text-white transition disabled:opacity-60"
-            >
-              {status === "loading" ? "Sending…" : "Send message"}
-            </button>
-            <a
-              href="mailto:guetaryan@gmail.com"
-              className="text-sm dark:text-gray-400 text-white dark:hover:text-yellow-400 hover:text-green-200"
-            >
-              or email me directly → guetaryan@gmail.com
-            </a>
-          </div>
-
-          {status === "success" && (
-            <p className="mt-4 text-green-400">Thanks! Your message was sent.</p>
-          )}
-          {status === "error" && (
-            <p className="mt-4 text-red-400">
-              Something went wrong. Please try again or use the email link.
-            </p>
-          )}
-        </form>
-        <footer>
-            <p>	&#169; John Averian Oro 2025.</p>
-        </footer>
       </div>
+
+      <footer className="pb-24 pt-8 text-center text-sm text-gray-400 lg:pb-8 dark:text-gray-600">
+        <p>© {new Date().getFullYear()} John Averian Oro. Built with React.</p>
+      </footer>
+    </div>
   );
 }
 
