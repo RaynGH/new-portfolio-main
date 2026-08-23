@@ -1,66 +1,83 @@
-import { useEffect, useState } from "react";
-import { FaHome, FaUser, FaTools, FaEnvelope} from "react-icons/fa";
-import { GrProjects } from "react-icons/gr";
-
+import { useEffect, useState } from 'react';
+import {
+  FaBriefcase,
+  FaEnvelope,
+  FaHome,
+  FaTools,
+  FaUser,
+} from 'react-icons/fa';
+import { GrProjects } from 'react-icons/gr';
 
 const SECTIONS = [
-  { id: "home",    label: "Home",    icon: FaHome },
-  { id: "about",   label: "About",   icon: FaUser },
-  { id: "skills",  label: "Skills",  icon: FaTools },
-  { id: "projects",  label: "Projects",  icon: GrProjects },
-  { id: "contact", label: "Contact", icon: FaEnvelope },
+  { id: 'home', label: 'Home', icon: FaHome },
+  { id: 'clients', label: 'Client Work', icon: FaBriefcase },
+  { id: 'about', label: 'About', icon: FaUser },
+  { id: 'skills', label: 'Skills', icon: FaTools },
+  { id: 'projects', label: 'Projects', icon: GrProjects },
+  { id: 'contact', label: 'Contact', icon: FaEnvelope },
 ];
 
 function Sidebar() {
+  const [active, setActive] = useState('home');
 
-    const [active, setActive] = useState("home");
-    useEffect(() => {
-    const obs = new IntersectionObserver(
+  useEffect(() => {
+    const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry) {
+          setActive(visibleEntry.target.id);
+        }
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 } 
+      {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: [0, 0.1, 0.25, 0.5],
+      }
     );
 
-    SECTIONS.forEach((s) => {
-      const el = document.getElementById(s.id);
-      if (el) obs.observe(el);
+    SECTIONS.forEach(({ id }) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
     });
 
-    return () => obs.disconnect();
+    return () => observer.disconnect();
   }, []);
 
   const goTo = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
-    return (
-        <aside className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col justify-between gap-4 z-40"
-      aria-label="Floating navigation"
+
+  return (
+    <aside
+      className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:left-7"
+      aria-label="Portfolio navigation"
     >
-      <nav className="border border-gray-700/25 rounded-2xl p-2 backdrop-blur-md shadow-xl">
-        <ul className="flex flex-col gap-2">
+      <nav className="rounded-2xl border border-gray-200/80 bg-white/80 p-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#101a2a]/80">
+        <ul className="flex flex-col gap-1.5">
           {SECTIONS.map(({ id, label, icon: Icon }) => {
             const isActive = active === id;
+
             return (
               <li key={id}>
                 <button
+                  type="button"
                   onClick={() => goTo(id)}
                   aria-label={label}
-                  className={[
-                    "group relative flex items-center justify-center w-11 h-11 rounded-xl",
-                    "transition border",
+                  aria-current={isActive ? 'location' : undefined}
+                  className={`group relative grid h-11 w-11 place-items-center rounded-xl border transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-yellow-300 ${
                     isActive
-                      ? " dark:border-yellow-400/40  dark:text-yellow-400 text-green-500 "
-                      : "dark:bg-[#101a2a] bg-green-800 border-white/10 dark:text-gray-400 text-white dark:hover:text-yellow-400 dark:hover:border-yellow-400/30 hover:text-green-300 hover:border-green-800/30"
-
-                  ].join(" ")}
+                      ? 'border-green-500/30 bg-green-50 text-green-600 shadow-sm dark:border-yellow-300/30 dark:bg-yellow-300/10 dark:text-yellow-300'
+                      : 'border-transparent text-gray-500 hover:border-green-500/20 hover:bg-green-50 hover:text-green-600 dark:text-gray-400 dark:hover:border-yellow-300/20 dark:hover:bg-yellow-300/10 dark:hover:text-yellow-300'
+                  }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span className="pointer-events-none absolute left-[3.1rem] whitespace-nowrap text-xs rounded-md px-2 py-1 dark:bg-[#101a2a] text-gray-800 border border-white/10 opacity-0 group-hover:opacity-100 transition">
+                  <Icon className="h-[18px] w-[18px]" />
+
+                  <span className="pointer-events-none absolute left-[3.35rem] z-50 whitespace-nowrap rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 opacity-0 shadow-lg transition-all duration-150 group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 dark:border-white/10 dark:bg-[#101a2a] dark:text-gray-200">
                     {label}
                   </span>
                 </button>
@@ -71,6 +88,6 @@ function Sidebar() {
       </nav>
     </aside>
   );
-};
+}
 
 export default Sidebar;
