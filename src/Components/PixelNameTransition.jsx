@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 const NAME = 'John Averian Oro';
-const CANVAS_PADDING_X = 84;
-const CANVAS_PADDING_Y = 52;
+const CANVAS_PADDING_X = 120;
+const CANVAS_PADDING_Y = 72;
 
 function PixelNameTransition() {
   const rootRef = useRef(null);
@@ -66,26 +66,30 @@ function PixelNameTransition() {
 
       const imageData = context.getImageData(0, 0, width, height);
       const particles = [];
-      const sampleStep = Math.max(3, Math.round(width / 170));
+      const sampleStep = Math.max(4, Math.round(width / 125));
       const centerX = width / 2;
       const centerY = height / 2;
+      const textStartX = CANVAS_PADDING_X;
+      const textWidth = Math.max(1, width - CANVAS_PADDING_X * 2);
 
       for (let y = 0; y < height; y += sampleStep) {
         for (let x = 0; x < width; x += sampleStep) {
           const alpha = imageData.data[(y * width + x) * 4 + 3];
-          if (alpha < 90) continue;
+          if (alpha < 80) continue;
 
-          const outwardX = ((x - centerX) / Math.max(centerX, 1)) * 52;
-          const outwardY = ((y - centerY) / Math.max(centerY, 1)) * 18;
+          const normalizedX = Math.min(1, Math.max(0, (x - textStartX) / textWidth));
+          const outwardX = ((x - centerX) / Math.max(centerX, 1)) * 72;
+          const outwardY = ((y - centerY) / Math.max(centerY, 1)) * 30;
 
           particles.push({
             x,
             y,
-            dx: outwardX + (Math.random() - 0.5) * 78,
-            dy: outwardY + (Math.random() - 0.58) * 58,
-            size: Math.max(2, sampleStep * (0.72 + Math.random() * 0.6)),
-            alpha: 0.62 + Math.random() * 0.38,
-            delay: Math.random() * 0.2,
+            dx: outwardX + 42 + (Math.random() - 0.5) * 110,
+            dy: outwardY + (Math.random() - 0.58) * 88,
+            size: Math.max(3, sampleStep * (0.9 + Math.random() * 0.75)),
+            alpha: 0.78 + Math.random() * 0.22,
+            delay: normalizedX * 0.34 + Math.random() * 0.08,
+            rotation: (Math.random() - 0.5) * 1.4,
           });
         }
       }
@@ -102,19 +106,21 @@ function PixelNameTransition() {
         particles.forEach((particle) => {
           const localProgress = Math.min(
             1,
-            Math.max(0, (progress - particle.delay) / (1 - particle.delay))
+            Math.max(0, (progress - particle.delay) / Math.max(0.001, 1 - particle.delay))
           );
 
-          const eased = 1 - Math.pow(1 - localProgress, 2.2);
-          const size = Math.max(0.6, particle.size * (1 - localProgress * 0.64));
+          const eased = 1 - Math.pow(1 - localProgress, 2.6);
+          const fadeProgress = Math.max(0, (localProgress - 0.34) / 0.66);
+          const size = Math.max(1, particle.size * (1 - localProgress * 0.42));
+          const x = particle.x + particle.dx * eased;
+          const y = particle.y + particle.dy * eased - Math.sin(localProgress * Math.PI) * 8;
 
-          context.globalAlpha = particle.alpha * Math.pow(1 - localProgress, 1.2);
-          context.fillRect(
-            particle.x + particle.dx * eased,
-            particle.y + particle.dy * eased,
-            size,
-            size
-          );
+          context.save();
+          context.globalAlpha = particle.alpha * Math.pow(1 - fadeProgress, 1.15);
+          context.translate(x + size / 2, y + size / 2);
+          context.rotate(particle.rotation * localProgress);
+          context.fillRect(-size / 2, -size / 2, size, size);
+          context.restore();
         });
 
         context.globalAlpha = 1;
@@ -122,25 +128,25 @@ function PixelNameTransition() {
 
       drawParticles();
 
-      gsap.set(clean, { opacity: 0, y: 8, filter: 'blur(6px)' });
+      gsap.set(clean, { opacity: 0, y: 10, filter: 'blur(7px)' });
       gsap.set(pixel, { opacity: 1 });
       gsap.set(canvas, { opacity: 0, visibility: 'visible' });
 
       timeline = gsap.timeline({ defaults: { overwrite: true } });
 
       timeline
-        .to({}, { duration: 0.8 })
-        .to(canvas, { opacity: 1, duration: 0.12, ease: 'none' }, 0.76)
-        .to(pixel, { opacity: 0, duration: 0.28, ease: 'power1.out' }, 0.82)
+        .to({}, { duration: 0.9 })
+        .to(canvas, { opacity: 1, duration: 0.08, ease: 'none' }, 0.88)
+        .to(pixel, { opacity: 0, duration: 0.12, ease: 'none' }, 0.92)
         .to(
           animationState,
           {
             progress: 1,
-            duration: 1.1,
+            duration: 1.35,
             ease: 'power2.out',
             onUpdate: drawParticles,
           },
-          0.8
+          0.9
         )
         .to(
           clean,
@@ -148,12 +154,12 @@ function PixelNameTransition() {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: 0.9,
+            duration: 0.72,
             ease: 'power2.out',
           },
-          1.15
+          1.52
         )
-        .to(canvas, { opacity: 0, duration: 0.22, ease: 'none' }, 1.86)
+        .to(canvas, { opacity: 0, duration: 0.16, ease: 'none' }, 2.18)
         .set(canvas, { visibility: 'hidden' });
     };
 
