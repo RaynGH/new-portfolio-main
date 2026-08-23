@@ -56,7 +56,7 @@ function Homepage() {
       <main className="portfolio-shell min-h-screen px-6 transition-colors duration-300 sm:px-10 md:px-16 lg:px-28 xl:px-44 2xl:px-64">
         <section
           id="home"
-          className="hero-atmosphere relative min-h-screen overflow-hidden flex flex-col"
+          className="hero-atmosphere relative -mx-6 min-h-screen overflow-hidden px-6 flex flex-col sm:-mx-10 sm:px-10 md:-mx-16 md:px-16 lg:-mx-28 lg:px-28 xl:-mx-44 xl:px-44 2xl:-mx-64 2xl:px-64"
           onPointerMove={handleHeroPointerMove}
         >
           <div className="hero-grid pointer-events-none absolute inset-0 -z-20" aria-hidden="true" />
