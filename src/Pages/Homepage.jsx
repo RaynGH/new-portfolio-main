@@ -12,6 +12,7 @@ import Projects from '../Components/Projects.jsx';
 import Services from '../Components/Services.jsx';
 import ContactMe from '../Components/ContactMe.jsx';
 import Experience from '../Components/Experience.jsx';
+import FeaturedCaseStudy from '../Components/FeaturedCaseStudy.jsx';
 
 const CLIENTS = [
   {
@@ -246,6 +247,10 @@ function Homepage() {
 
         <section id="services" className="py-16 sm:py-24">
           <Services />
+        </section>
+
+        <section id="case-study" className="py-24 sm:py-32">
+          <FeaturedCaseStudy />
         </section>
 
         <section id="projects" className="py-24 sm:py-32">
