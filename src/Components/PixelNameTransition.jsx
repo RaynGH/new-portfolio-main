@@ -97,7 +97,6 @@ function PixelNameTransition() {
 
       const centerX = width / 2;
       const centerY = height / 2;
-      const particleColor = pixelStyle.color;
 
       particlePoints.forEach((point) => {
         const particle = document.createElement('span');
@@ -112,7 +111,6 @@ function PixelNameTransition() {
         particle.style.top = `${point.y}px`;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
-        particle.style.backgroundColor = particleColor;
         particle.style.opacity = '0';
         particle.dataset.dx = `${finalDx}`;
         particle.dataset.dy = `${finalDy}`;
