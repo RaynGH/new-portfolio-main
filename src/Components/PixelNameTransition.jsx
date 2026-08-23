@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 const NAME = 'John Averian Oro';
-const PARTICLE_PADDING_X = 96;
-const PARTICLE_PADDING_Y = 64;
+const PARTICLE_PADDING_X = 112;
+const PARTICLE_PADDING_Y = 78;
 const MAX_PARTICLES = 240;
 
 function PixelNameTransition() {
@@ -95,9 +95,11 @@ function PixelNameTransition() {
 
       particlePoints.forEach((point) => {
         const particle = document.createElement('span');
-        const size = Math.max(3, sampleStep * (0.82 + Math.random() * 0.5));
+        const size = Math.max(5, sampleStep * (1.08 + Math.random() * 0.45));
         const normalizedX = (point.x - centerX) / Math.max(centerX, 1);
         const normalizedY = (point.y - centerY) / Math.max(centerY, 1);
+        const finalDx = normalizedX * 118 + (Math.random() - 0.5) * 122;
+        const finalDy = normalizedY * 48 + (Math.random() - 0.72) * 112;
 
         particle.className = 'hero-name-particle';
         particle.style.left = `${point.x}px`;
@@ -105,9 +107,11 @@ function PixelNameTransition() {
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         particle.style.backgroundColor = particleColor;
-        particle.dataset.dx = `${normalizedX * 82 + (Math.random() - 0.5) * 96}`;
-        particle.dataset.dy = `${normalizedY * 34 + (Math.random() - 0.7) * 86}`;
-        particle.dataset.rotation = `${(Math.random() - 0.5) * 150}`;
+        particle.dataset.dx = `${finalDx}`;
+        particle.dataset.dy = `${finalDy}`;
+        particle.dataset.midX = `${finalDx * (0.24 + Math.random() * 0.08)}`;
+        particle.dataset.midY = `${finalDy * (0.24 + Math.random() * 0.08)}`;
+        particle.dataset.rotation = `${(Math.random() - 0.5) * 180}`;
 
         particleLayer.appendChild(particle);
       });
@@ -118,6 +122,7 @@ function PixelNameTransition() {
 
       gsap.set(clean, { opacity: 0, y: 9, filter: 'blur(7px)' });
       gsap.set(pixel, { opacity: 1 });
+      gsap.set(particleLayer, { visibility: 'visible' });
       gsap.set(particles, { opacity: 0, scale: 1, x: 0, y: 0, rotation: 0 });
 
       timeline = gsap.timeline({ defaults: { overwrite: true } });
@@ -125,7 +130,25 @@ function PixelNameTransition() {
       timeline
         .to({}, { duration: 0.85 })
         .set(particles, { opacity: 1 }, 0.85)
-        .to(pixel, { opacity: 0, duration: 0.18, ease: 'none' }, 0.86)
+        .to(pixel, { opacity: 0, duration: 0.12, ease: 'none' }, 0.86)
+        .to({}, { duration: 0.2 }, 0.97)
+        .to(
+          particles,
+          {
+            x: (_, element) => Number(element.dataset.midX),
+            y: (_, element) => Number(element.dataset.midY),
+            rotation: (_, element) => Number(element.dataset.rotation) * 0.22,
+            opacity: 1,
+            scale: 1,
+            duration: 0.34,
+            ease: 'power1.out',
+            stagger: {
+              each: 0.0025,
+              from: 'start',
+            },
+          },
+          1.12
+        )
         .to(
           particles,
           {
@@ -133,15 +156,15 @@ function PixelNameTransition() {
             y: (_, element) => Number(element.dataset.dy),
             rotation: (_, element) => Number(element.dataset.rotation),
             opacity: 0,
-            scale: () => 0.45 + Math.random() * 0.35,
-            duration: 1.25,
+            scale: () => 0.38 + Math.random() * 0.32,
+            duration: 0.92,
             ease: 'power2.out',
             stagger: {
               each: 0.003,
               from: 'start',
             },
           },
-          0.9
+          1.42
         )
         .to(
           clean,
@@ -149,12 +172,12 @@ function PixelNameTransition() {
             opacity: 1,
             y: 0,
             filter: 'blur(0px)',
-            duration: 0.82,
+            duration: 0.78,
             ease: 'power2.out',
           },
-          1.5
+          1.72
         )
-        .set(particleLayer, { visibility: 'hidden' }, 2.35);
+        .set(particleLayer, { visibility: 'hidden' }, 2.58);
     };
 
     runAnimation();
