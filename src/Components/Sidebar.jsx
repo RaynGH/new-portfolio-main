@@ -3,6 +3,7 @@ import {
   FaBriefcase,
   FaEnvelope,
   FaHome,
+  FaHistory,
   FaTools,
   FaUser,
 } from 'react-icons/fa';
@@ -11,6 +12,7 @@ import { GrProjects } from 'react-icons/gr';
 const SECTIONS = [
   { id: 'home', label: 'Home', icon: FaHome },
   { id: 'clients', label: 'Client Work', icon: FaBriefcase },
+  { id: 'experience', label: 'Experience', icon: FaHistory },
   { id: 'about', label: 'About', icon: FaUser },
   { id: 'skills', label: 'Skills', icon: FaTools },
   { id: 'projects', label: 'Projects', icon: GrProjects },
