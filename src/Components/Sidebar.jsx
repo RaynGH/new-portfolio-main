@@ -59,9 +59,11 @@ function Sidebar() {
       className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block xl:left-7"
       aria-label="Portfolio navigation"
     >
-      <nav className="rounded-2xl border border-gray-200/80 bg-white/80 p-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#101a2a]/80">
-        <ul className="flex flex-col gap-1.5">
-          {SECTIONS.map(({ id, label, icon: Icon }) => {
+      <nav className="sidebar-idle-shell relative overflow-hidden rounded-2xl border border-gray-200/80 bg-white/80 p-2 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#101a2a]/80">
+        <span className="sidebar-idle-shimmer" aria-hidden="true" />
+
+        <ul className="relative z-10 flex flex-col gap-1.5">
+          {SECTIONS.map(({ id, label, icon: Icon }, index) => {
             const isActive = active === id;
 
             return (
@@ -73,11 +75,17 @@ function Sidebar() {
                   aria-current={isActive ? 'location' : undefined}
                   className={`group relative grid h-11 w-11 place-items-center rounded-xl border transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-yellow-300 ${
                     isActive
-                      ? 'border-green-500/30 bg-green-50 text-green-600 shadow-sm dark:border-yellow-300/30 dark:bg-yellow-300/10 dark:text-yellow-300'
+                      ? 'sidebar-idle-active border-green-500/30 bg-green-50 text-green-600 shadow-sm dark:border-yellow-300/30 dark:bg-yellow-300/10 dark:text-yellow-300'
                       : 'border-transparent text-gray-500 hover:border-green-500/20 hover:bg-green-50 hover:text-green-600 dark:text-gray-400 dark:hover:border-yellow-300/20 dark:hover:bg-yellow-300/10 dark:hover:text-yellow-300'
                   }`}
                 >
-                  <Icon className="h-[18px] w-[18px]" />
+                  <span
+                    className={isActive ? 'sidebar-idle-icon' : 'sidebar-idle-icon sidebar-idle-icon-float'}
+                    style={{ '--idle-delay': `${index * 0.32}s` }}
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
+                  </span>
 
                   <span className="pointer-events-none absolute left-[3.35rem] z-50 whitespace-nowrap rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 opacity-0 shadow-lg transition-all duration-150 group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 dark:border-white/10 dark:bg-[#101a2a] dark:text-gray-200">
                     {label}
