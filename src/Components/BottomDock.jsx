@@ -11,9 +11,9 @@ import { GrProjects } from 'react-icons/gr';
 
 const ITEMS = [
   { id: 'home', icon: FaHome, label: 'Home' },
+  { id: 'about', icon: FaUser, label: 'About' },
   { id: 'clients', icon: FaBriefcase, label: 'Client Work' },
   { id: 'experience', icon: FaHistory, label: 'Experience' },
-  { id: 'about', icon: FaUser, label: 'About' },
   { id: 'skills', icon: FaTools, label: 'Skills' },
   { id: 'projects', icon: GrProjects, label: 'Projects' },
   { id: 'contact', icon: FaEnvelope, label: 'Contact' },
