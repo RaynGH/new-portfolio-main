@@ -2,6 +2,15 @@ import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 const EXPERIENCE = [
   {
+    period: 'Present',
+    role: 'Tech Virtual Assistant',
+    company: 'Alltomate · Dunrite · Junkshot',
+    type: 'Current Role',
+    description:
+      'Support multiple client brands across website operations, SEO and content tasks, digital production, quality assurance, and day-to-day technical and creative execution.',
+    highlights: ['Website operations', 'SEO & content', 'Digital production', 'Client support'],
+  },
+  {
     period: 'Aug 2024 — Jul 2025',
     role: '2D Pixel Animator',
     company: 'Trapsoul Games',
@@ -41,7 +50,7 @@ function Experience() {
           A career built across support, technology, and creative work.
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-400">
-          My professional path has moved from customer support into technical support and creative production, building communication, problem-solving, and execution skills along the way.
+          My professional path has moved from customer support into technical support, creative production, and client-facing digital operations, building communication, problem-solving, and execution skills along the way.
         </p>
       </header>
 
