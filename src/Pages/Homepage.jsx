@@ -155,6 +155,42 @@ function Homepage() {
           </div>
         </section>
 
+        <section id="about" className="py-24 sm:py-32">
+          <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-[0.8fr_1.2fr] items-center">
+            <div className="flex justify-center lg:justify-start">
+              <div className="relative">
+                <div className="absolute -inset-3 rounded-full border border-green-500/20 dark:border-yellow-300/20" />
+                <img
+                  src={Image}
+                  className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-full object-cover border-2 border-green-500 shadow-xl dark:border-yellow-300"
+                  alt="John Averian Oro"
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                About Me
+              </p>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                Creative thinking backed by technical execution.
+              </h2>
+              <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">
+                I’m a multidisciplinary digital professional with experience across web
+                development, website operations, SEO-driven content work, technical
+                support, and 2D animation. I enjoy work that sits between creativity and
+                technology—whether that means improving a website, organizing content for
+                better discoverability, solving a technical problem, or bringing a visual
+                idea to life through animation.
+              </p>
+              <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">
+                My goal is simple: create work that is useful, clear, polished, and built
+                with the end user in mind.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section id="clients" className="py-24 sm:py-32">
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 max-w-2xl">
@@ -207,42 +243,6 @@ function Homepage() {
 
         <section id="experience" className="py-24 sm:py-32">
           <Experience />
-        </section>
-
-        <section id="about" className="py-24 sm:py-32">
-          <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-[0.8fr_1.2fr] items-center">
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative">
-                <div className="absolute -inset-3 rounded-full border border-green-500/20 dark:border-yellow-300/20" />
-                <img
-                  src={Image}
-                  className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-full object-cover border-2 border-green-500 shadow-xl dark:border-yellow-300"
-                  alt="John Averian Oro"
-                />
-              </div>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
-                About Me
-              </p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-                Creative thinking backed by technical execution.
-              </h2>
-              <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">
-                I’m a multidisciplinary digital professional with experience across web
-                development, website operations, SEO-driven content work, technical
-                support, and 2D animation. I enjoy work that sits between creativity and
-                technology—whether that means improving a website, organizing content for
-                better discoverability, solving a technical problem, or bringing a visual
-                idea to life through animation.
-              </p>
-              <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">
-                My goal is simple: create work that is useful, clear, polished, and built
-                with the end user in mind.
-              </p>
-            </div>
-          </div>
         </section>
 
         <section id="skills" className="py-24 sm:py-32">
