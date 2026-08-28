@@ -14,6 +14,7 @@ import ContactMe from '../Components/ContactMe.jsx';
 import Experience from '../Components/Experience.jsx';
 import FeaturedCaseStudy from '../Components/FeaturedCaseStudy.jsx';
 import PixelNameTransition from '../Components/PixelNameTransition.jsx';
+import ScrollReveal from '../Components/ScrollReveal.jsx';
 
 const CLIENTS = [
   {
@@ -157,85 +158,88 @@ function Homepage() {
 
         <section id="about" className="py-24 sm:py-32">
           <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-[0.8fr_1.2fr] items-center">
-            <div className="flex justify-center lg:justify-start">
-              <div className="relative">
-                <div className="absolute -inset-3 rounded-full border border-green-500/20 dark:border-yellow-300/20" />
+            <ScrollReveal x={-28} distance={8} className="flex justify-center lg:justify-start">
+              <div className="about-profile-float relative">
+                <div className="about-profile-ring absolute -inset-3 rounded-full border border-green-500/20 dark:border-yellow-300/20" />
                 <img
                   src={Image}
                   className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-full object-cover border-2 border-green-500 shadow-xl dark:border-yellow-300"
                   alt="John Averian Oro"
                 />
               </div>
-            </div>
+            </ScrollReveal>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
-                About Me
-              </p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-                Creative thinking backed by technical execution.
-              </h2>
-              <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">
-                I’m a multidisciplinary digital professional with experience across web
-                development, website operations, SEO-driven content work, technical
-                support, and 2D animation. I enjoy work that sits between creativity and
-                technology—whether that means improving a website, organizing content for
-                better discoverability, solving a technical problem, or bringing a visual
-                idea to life through animation.
-              </p>
-              <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">
-                My goal is simple: create work that is useful, clear, polished, and built
-                with the end user in mind.
-              </p>
-            </div>
+            <ScrollReveal x={28} distance={8} delay={0.08}>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                  About Me
+                </p>
+                <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                  Creative thinking backed by technical execution.
+                </h2>
+                <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">
+                  I’m a multidisciplinary digital professional with experience across web
+                  development, website operations, SEO-driven content work, technical
+                  support, and 2D animation. I enjoy work that sits between creativity and
+                  technology—whether that means improving a website, organizing content for
+                  better discoverability, solving a technical problem, or bringing a visual
+                  idea to life through animation.
+                </p>
+                <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">
+                  My goal is simple: create work that is useful, clear, polished, and built
+                  with the end user in mind.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
         <section id="clients" className="py-24 sm:py-32">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-12 max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
-                Selected Client Work
-              </p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-                Real work. Real responsibilities.
-              </h2>
-              <p className="mt-4 leading-7 text-gray-600 dark:text-gray-400">
-                A selection of brands I’ve supported across website operations, SEO,
-                digital content, and creative execution.
-              </p>
-            </div>
+            <ScrollReveal className="mb-12 max-w-2xl">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-green-600 dark:text-yellow-300">
+                  Selected Client Work
+                </p>
+                <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+                  Real work. Real responsibilities.
+                </h2>
+                <p className="mt-4 leading-7 text-gray-600 dark:text-gray-400">
+                  A selection of brands I’ve supported across website operations, SEO,
+                  digital content, and creative execution.
+                </p>
+              </div>
+            </ScrollReveal>
 
             <div className="grid gap-6 lg:grid-cols-3">
-              {CLIENTS.map((client) => (
-                <article
-                  key={client.name}
-                  className="rounded-2xl border border-gray-200 bg-white/80 p-6 shadow-sm backdrop-blur-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-white/10 dark:bg-[#101a2a]/90"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-600 dark:text-yellow-300">
-                    Client
-                  </p>
-                  <h3 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">
-                    {client.name}
-                  </h3>
-                  <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                    {client.role}
-                  </p>
-                  <p className="mt-5 text-sm leading-7 text-gray-600 dark:text-gray-300">
-                    {client.description}
-                  </p>
+              {CLIENTS.map((client, index) => (
+                <ScrollReveal key={client.name} delay={0.08 + index * 0.1} className="h-full">
+                  <article className="client-motion-card h-full rounded-2xl border border-gray-200 bg-white/80 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-[#101a2a]/90">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-green-600 dark:text-yellow-300">
+                      Client
+                    </p>
+                    <h3 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">
+                      {client.name}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                      {client.role}
+                    </p>
+                    <p className="mt-5 text-sm leading-7 text-gray-600 dark:text-gray-300">
+                      {client.description}
+                    </p>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {client.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-yellow-400/10 dark:text-yellow-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </article>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {client.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-yellow-400/10 dark:text-yellow-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                </ScrollReveal>
               ))}
             </div>
           </div>
